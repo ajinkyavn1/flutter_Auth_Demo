@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_firebase_demo/SignUp.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -7,7 +8,8 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
 final _from=GlobalKey<FormState>();
-
+var email;
+var password;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -16,7 +18,6 @@ final _from=GlobalKey<FormState>();
       body: SingleChildScrollView(
         reverse: true,
         child: Center(
-          
          child:Column(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -38,6 +39,9 @@ final _from=GlobalKey<FormState>();
                         Text("Login",style: TextStyle(fontSize:40,color: Colors.green,fontWeight: FontWeight.bold),),
                         SizedBox(height: 25,),
                         TextFormField(
+                          onChanged: (value){
+                            email=value;
+                          },
                           style: TextStyle(fontWeight: FontWeight.bold),
                           validator: (value){
                             if(value==null && value.isEmpty)
@@ -53,6 +57,9 @@ final _from=GlobalKey<FormState>();
                         ),
                         SizedBox(height: 15,),
                         TextFormField(
+                          onChanged: (value){
+                            password=value;
+                          },
                           obscureText: true,
                           style: TextStyle(fontWeight: FontWeight.bold),
                           decoration: InputDecoration(
@@ -82,11 +89,7 @@ final _from=GlobalKey<FormState>();
                         SizedBox(height: 10,),
                         ElevatedButton(
                             onPressed: (){
-                              if(!(_from.currentState.validate())){
-                                ScaffoldMessenger.of(context)
-                                    .showSnackBar(SnackBar(content: Text('Processing Data')));
-
-                              }
+                              Navigator.push(context, MaterialPageRoute(builder:(context)=>SignUPPage()));
                             },
                             child:Text("SignUp")
                         ),
