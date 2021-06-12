@@ -11,24 +11,32 @@ final _from=GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.deepPurple,
       appBar: AppBar(title: Text("LoginPage"),centerTitle: true,),
       body: SingleChildScrollView(
+        reverse: true,
         child: Center(
-         child:Form(
-           key: _from,
-           child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Image.network("https://www.gstatic.com/mobilesdk/160503_mobilesdk/logo/2x/firebase_28dp.png",),
-                    Card(
+          
+         child:Column(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              SizedBox(height: 55,),
+              Image.network("https://t3.ftcdn.net/jpg/01/22/71/96/240_F_122719641_V0yw2cAOrfxsON3HeWi2Sf4iVxhv27QO.jpg",),
+              SizedBox(height: 25,),
+                  Form(
+                    key: _from,
+                    child: Card(
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(25)
                       ),
-                  child: Padding(
+                child: Padding(
                     padding: EdgeInsets.all(20),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
+                        Text("Login",style: TextStyle(fontSize:40,color: Colors.green,fontWeight: FontWeight.bold),),
+                        SizedBox(height: 25,),
                         TextFormField(
                           style: TextStyle(fontWeight: FontWeight.bold),
                           validator: (value){
@@ -63,7 +71,7 @@ final _from=GlobalKey<FormState>();
                         SizedBox(height: 15,),
                         ElevatedButton(
                             onPressed: (){
-                              if(!(_from.currentState.validate())){
+                              if((_from.currentState.validate())){
                                 ScaffoldMessenger.of(context)
                                     .showSnackBar(SnackBar(content: Text('Processing Data')));
 
@@ -84,11 +92,11 @@ final _from=GlobalKey<FormState>();
                         ),
                       ],
                     ),
-                  ),
                 ),
-              ],
-            ),
-         ),
+              ),
+                  ),
+            ],
+          ),
 
         ),
       ),
