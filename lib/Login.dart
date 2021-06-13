@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_firebase_demo/HomePage.dart';
 import 'package:flutter_firebase_demo/SignUp.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -7,6 +9,7 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  final _auth=FirebaseAuth.instance;
 final _from=GlobalKey<FormState>();
 var email;
 var password;
@@ -80,11 +83,20 @@ var password;
                             onPressed: (){
                               if((_from.currentState.validate())){
                                 ScaffoldMessenger.of(context)
-                                    .showSnackBar(SnackBar(content: Text('Processing Data')));
+                                    .showSnackBar(SnackBar(content: Text('Signing In')));
+                                 _auth.signInWithEmailAndPassword(email: email, password: password).then((SignInUser){
+                                   Navigator.push(context, MaterialPageRoute(builder:(context)=>HomePage()));
+                                 });
 
                               }
                             },
                             child:Text("SignIn")
+                        ),
+                        ElevatedButton(
+                            onPressed: (){
+                              Navigator.push(context, MaterialPageRoute(builder:(context)=>SignUPPage()));
+                            },
+                            child:Text("SignUp")
                         ),
                         SizedBox(height: 10,),
                         ElevatedButton(
