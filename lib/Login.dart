@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_firebase_demo/HomePage.dart';
 import 'package:flutter_firebase_demo/SignUp.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter_auth_buttons/flutter_auth_buttons.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -10,6 +13,7 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   final _auth=FirebaseAuth.instance;
+  final _firestore=Firestore.instance;
 final _from=GlobalKey<FormState>();
 var email;
 var password;
@@ -92,12 +96,6 @@ var password;
                             },
                             child:Text("SignIn")
                         ),
-                        ElevatedButton(
-                            onPressed: (){
-                              Navigator.push(context, MaterialPageRoute(builder:(context)=>SignUPPage()));
-                            },
-                            child:Text("SignUp")
-                        ),
                         SizedBox(height: 10,),
                         ElevatedButton(
                             onPressed: (){
@@ -109,7 +107,14 @@ var password;
                     ),
                 ),
               ),
-                  ),
+             ),
+              SizedBox(height:10,),
+             GoogleSignInButton(
+               onPressed: (){
+               },
+
+             ),
+              SizedBox(height:50,)
             ],
           ),
 
